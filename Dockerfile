@@ -1,6 +1,6 @@
-FROM docker.io/bitnami/spark:3
-LABEL maintainer="s1mplecc <s1mple951205@gmail.com>"
-LABEL description="Docker image with Spark (3.1.2) and Hadoop (3.2.0), based on bitnami/spark:3. \
+FROM bitnami/spark:3.2
+LABEL maintainer="yszc <ecnu.yszc@gmail.com>"
+LABEL description="Docker image with Spark (3.2.4) and Hadoop (3.3.1), based on bitnami/spark:3. \
 For more information, please visit https://github.com/s1mplecc/spark-hadoop-docker."
 
 USER root
@@ -12,15 +12,15 @@ ENV PATH="$HADOOP_HOME/hadoop/sbin:$HADOOP_HOME/bin:$PATH"
 
 WORKDIR /opt
 
-RUN apt-get update && apt-get install -y openssh-server
+RUN apt-get update && apt-get install -y openssh-server curl
 
 RUN ssh-keygen -t rsa -f /root/.ssh/id_rsa -P '' && \
     cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
-
-RUN curl -OL https://archive.apache.org/dist/hadoop/common/hadoop-3.2.0/hadoop-3.2.0.tar.gz
-RUN tar -xzvf hadoop-3.2.0.tar.gz && \
-	mv hadoop-3.2.0 hadoop && \
-	rm -rf hadoop-3.2.0.tar.gz && \
+    
+RUN curl -OL https://archive.apache.org/dist/hadoop/common/hadoop-3.3.1/hadoop-3.3.1.tar.gz
+RUN tar -xzvf hadoop-3.3.1.tar.gz && \
+	mv hadoop-3.3.1 hadoop && \
+	rm -rf hadoop-3.3.1.tar.gz && \
 	mkdir /var/log/hadoop
 
 RUN mkdir -p /root/hdfs/namenode && \ 
