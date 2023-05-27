@@ -17,8 +17,8 @@ RUN apt-get update && apt-get install -y openssh-server curl
 RUN ssh-keygen -t rsa -f /root/.ssh/id_rsa -P '' && \
     cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
     
-RUN curl -OL https://archive.apache.org/dist/hadoop/common/hadoop-3.3.1/hadoop-3.3.1.tar.gz
-RUN tar -xzvf hadoop-3.3.1.tar.gz && \
+RUN curl -OL https://archive.apache.org/dist/hadoop/common/hadoop-3.3.1/hadoop-3.3.1.tar.gz && \
+    tar -xzvf hadoop-3.3.1.tar.gz && \
 	mv hadoop-3.3.1 hadoop && \
 	rm -rf hadoop-3.3.1.tar.gz && \
 	mkdir /var/log/hadoop
